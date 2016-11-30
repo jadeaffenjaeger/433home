@@ -1,0 +1,116 @@
+body {
+    background-color: #DDD;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+
+h1 {
+    font-family:    'Lato', sans-serif;
+    font-weight:    700;
+    font-size:      40px;
+    padding:        12px;
+    margin:         0px;
+}
+
+button {
+    width: 100%;
+    border: none;
+    margin-top: 5px;
+    color:white;
+    padding: 2px;
+    padding: 10px, 20px;
+    font-size: 16px;
+    font-weight: 400;
+    -webkit-transition-duration: 0.3s; /* Safari */
+        transition-duration: 0.3s;
+}
+
+button.act {
+    background-color: #EEAB80;
+}
+
+button.act:hover {
+    background-color: #E37222;
+}
+
+button.pas {
+    background-color: #65BABF;
+}
+
+button.pas:hover {
+    background-color: #07889B;
+}
+
+
+
+#main {
+    width: 600px;
+    padding: 20px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFF;
+    box-shadow: 0 0 20px #888;
+    -moz-box-shadow: 0 0 20px #888;
+}
+
+#heading{
+    background-color: #07889B
+}
+
+#footer{
+    margin-top: 5px;
+    padding: 5px 10px;
+    overflow: auto;
+    font-size: 10px;
+    background-color: #07889B
+}
+
+#uptime {
+    float: left;
+    text-align: left;
+    width: 20%;
+}
+
+#fs {
+    float: left;
+    text-align: left;
+    width: 35%;
+}
+
+#ip {
+    float: left;
+    text-align: left;
+    width: 25%;
+}
+
+#rssi {
+    float: left;
+    text-align: left;
+    width: 20%;
+}
+
+
+@media only screen and (max-device-width: 600px) {
+    #main {
+        width: 90%;
+        padding: 30px;
+        margin-top: 30px;
+    }
+
+    #footer {
+        font-size: 28px;
+    }
+
+    h1 {
+        padding: 20px;
+        font-size: 56px; 
+    }
+
+    button {
+        font-size: 50px;
+        height: 180px;
+    }
+}
