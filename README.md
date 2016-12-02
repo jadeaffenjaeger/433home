@@ -13,6 +13,7 @@ This is what one command looks like on the analyzer output:
 ![Sample trace output](/images/trace_1_on.png)
 
 I repeated the process for the on 
+
     1 ON    1101 0101 1101 0100 0000 1100 0
     1 OFF   1101 0101 1101 0100 0000 0011 0
 
