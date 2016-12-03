@@ -47,14 +47,14 @@ void toggleSwitch(short id) {
 }
 
 void send_command(unsigned long seq) {
-	for (int i = 0; i < 10; i++) {
-		for(int i = 24; i >= 0; i--) {
-			if ((seq >> i) & 0b1) {
-				send_one();
-			} else {
-				send_zero();
-			}
-		}
-		delay(10);
-	}
+    for (int i = 0; i < 10; i++) {
+        for(int i = 24; i >= 0; i--) {
+            if ((seq >> i) & 0b1) {
+                send_one();
+            } else {
+                send_zero();
+            }
+        }
+        delay(10);
+    }
 }
