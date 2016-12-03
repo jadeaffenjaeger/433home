@@ -29,6 +29,7 @@ The remote sends each control sequence 5 times in a row, but I went with 10 time
 There's only one page, which is the html template in the /data folder. The favicon and the CSS are seperate files and get served statically through SPIFFS directly. The html is parsed by the program before delivery and certain wildcards are replaced with dynamic values. This slows down page delivery quite a bit, so I will probably move the system info to a seperate page and only parse for the button states. The request gets sent through a POST request, because I find that to be a much cleaner solution than using GET.
 
 This is what the whole thing looks like on a my phone... third button currently has nothing connected to it (obviously).
+
 ![Page on phone](/images/page_phone.png)
 
 And that's what it looks like in a browser. One of the next steps will be adding DNS support.
