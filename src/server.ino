@@ -1,23 +1,21 @@
 #include <WiFiClient.h>
-#include <ArduinoOTA.h>
-#include <ESP8266mDNS.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266WiFi.h>
 #include <FS.h>
 
 // set up WiFi access
-const char *ssid = "SSID";
-const char *password = "PASSWORD";
+const char *ssid =      "SSID";
+const char *password =  "PASSWORD";
 
 // set up static IP
-IPAddress ip(192,168,0,10);
-IPAddress gateway(192,168,0,1);
-IPAddress subnet(255,255,255,0);
+IPAddress           ip(192,168,0,10);
+IPAddress           gateway(192,168,0,1);
+IPAddress           subnet(255,255,255,0);
 
-ESP8266WebServer server(80);
+ESP8266WebServer    server(80);
 
 // store buttons
-short buttons[] = {0,0,0};
+short buttons[] =   {0,0,0};
 
 // show how much space is used in Filesystem (total and percent)
 String getFSInfo() {
@@ -108,7 +106,6 @@ void setup() {
     WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, password);
     WiFi.config(ip, gateway, subnet);
-    WiFi.hostname("433MEGA");
 
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
@@ -116,8 +113,6 @@ void setup() {
 
     server.begin();
     SPIFFS.begin();
-
-    ArduinoOTA.begin();
 
     // set up server
     server.onNotFound(handleNotFound);
@@ -129,6 +124,5 @@ void setup() {
 }
 
 void loop() {
-    ArduinoOTA.handle();
     server.handleClient();
 }

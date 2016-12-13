@@ -23,24 +23,28 @@ button {
     padding: 10px, 20px;
     font-size: 16px;
     font-weight: 400;
-    -webkit-transition-duration: 0.3s; /* Safari */
-        transition-duration: 0.3s;
+    -webkit-transition-duration: 0.2s; /* Safari */
+        transition-duration: 0.2s;
 }
 
 button.act {
-    background-color: #EEAB80;
-}
-
-button.act:hover {
     background-color: #E37222;
 }
 
+button.act:hover {
+    color: #E37222;
+    outline: 1px solid #E37222;
+    background-color: white;
+}
+
 button.pas {
-    background-color: #65BABF;
+    background-color: #07889B;
 }
 
 button.pas:hover {
-    background-color: #07889B;
+    color: #07889B;
+    outline: 1px solid #07889B;
+    background-color: white;
 }
 
 
