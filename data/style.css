@@ -1,9 +1,13 @@
+body, input, button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
 body {
     background-color: #DDD;
     color: white;
-    font-family: 'Roboto', sans-serif;
     text-align: center;
-    font-size: 16px;
 }
 
 h1 {
@@ -21,8 +25,6 @@ button {
     padding: 2px;
     padding: 10px, 20px;
     color: white;
-    font-size:      16px;
-    font-weight: 400;
     -webkit-transition-duration: 0.2s; /* Safari */
         transition-duration: 0.2s;
 }
@@ -70,7 +72,8 @@ ul {
 }
 
 li {
-    margin-bottom: 4px;
+    height: 30px;
+    margin: 10px 0px;
     list-style-type: none;
 }
 
@@ -84,11 +87,16 @@ li {
 
 .info_item {
     float: left;
-    width: 30%
+    width: 40%;
+}
+
+.info_content {
+    float: right;
+    width: 60%;
 }
 
 form{
-    padding-bottom: 5px
+    padding-bottom: 5px;
 }
 
 #main {
@@ -116,7 +124,11 @@ form{
         width: 90%;
         padding: 30px;
         margin-top: 30px;
-        font-size: 50px;
+        font-size: 35px;
+    }
+
+    li {
+        height: 60px;
     }
 
     h1 {
@@ -126,5 +138,6 @@ form{
 
     button {
         height: 180px;
+        font-size: 50px;
     }
 }
