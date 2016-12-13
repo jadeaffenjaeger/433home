@@ -3,8 +3,8 @@ body {
     color: white;
     font-family: 'Roboto', sans-serif;
     text-align: center;
+    font-size: 16px;
 }
-
 
 h1 {
     font-family:    'Lato', sans-serif;
@@ -18,10 +18,10 @@ button {
     width: 100%;
     border: none;
     margin-top: 5px;
-    color:white;
     padding: 2px;
     padding: 10px, 20px;
-    font-size: 16px;
+    color: white;
+    font-size:      16px;
     font-weight: 400;
     -webkit-transition-duration: 0.2s; /* Safari */
         transition-duration: 0.2s;
@@ -47,7 +47,49 @@ button.pas:hover {
     background-color: white;
 }
 
+a {
+    padding: 8px 20px;
+    text-decoration: none;
+    color: white;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+}
 
+a:active {
+    color: #E37222;
+}
+
+a:hover{
+    color: #E37222;
+    background-color: white;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    margin-bottom: 4px;
+    list-style-type: none;
+}
+
+.info {
+    border-left: 1px solid #07889B;
+    border-right: 1px solid #07889B;
+    color: #07889B;
+    text-align:  left;
+    padding: 10px ;
+}
+
+.info_item {
+    float: left;
+    width: 30%
+}
+
+form{
+    padding-bottom: 5px
+}
 
 #main {
     width: 600px;
@@ -61,51 +103,20 @@ button.pas:hover {
 }
 
 #heading{
-    background-color: #07889B
+    background-color: #07889B;
 }
 
-#footer{
-    margin-top: 5px;
-    padding: 5px 10px;
-    overflow: auto;
-    font-size: 10px;
-    background-color: #07889B
+#footer {
+    background-color: #07889B;
+    padding: 8px 0px;
 }
-
-#uptime {
-    float: left;
-    text-align: left;
-    width: 20%;
-}
-
-#fs {
-    float: left;
-    text-align: left;
-    width: 35%;
-}
-
-#ip {
-    float: left;
-    text-align: left;
-    width: 25%;
-}
-
-#rssi {
-    float: left;
-    text-align: left;
-    width: 20%;
-}
-
 
 @media only screen and (max-device-width: 600px) {
     #main {
         width: 90%;
         padding: 30px;
         margin-top: 30px;
-    }
-
-    #footer {
-        font-size: 28px;
+        font-size: 50px;
     }
 
     h1 {
@@ -114,7 +125,6 @@ button.pas:hover {
     }
 
     button {
-        font-size: 50px;
         height: 180px;
     }
 }

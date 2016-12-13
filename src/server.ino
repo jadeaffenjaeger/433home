@@ -67,6 +67,26 @@ void handleNotFound() {
     server.send ( 404, "text/plain", message  );
 }
 
+void handleInfo() {
+    Dir dir = SPIFFS.openDir("/");
+    String infoHtml;
+
+    File infoFile = SPIFFS.open("/info.html", "r");
+
+    if (infoFile) {
+        infoHtml = infoFile.readString();
+        infoFile.close();
+
+        infoHtml.replace("[uptime]", getUpTime());
+        infoHtml.replace("[rssi]", String(WiFi.RSSI()));
+        infoHtml.replace("[FS]", getFSInfo());
+        infoHtml.replace("[IP]", WiFi.localIP().toString());
+
+        server.send(200, "text/html", infoHtml);
+    } else {
+        handleNotFound();
+    }
+}
 // handle index request
 void handleRequest() {
     if(server.hasArg("switch")){
@@ -88,11 +108,6 @@ void handleRequest() {
         indexHtml.replace("[buttonState1]", getButonState(1));
         indexHtml.replace("[buttonState2]", getButonState(2));
         indexHtml.replace("[buttonState3]", getButonState(3));
-
-        indexHtml.replace("[uptime]", getUpTime());
-        indexHtml.replace("[rssi]", String(WiFi.RSSI()));
-        indexHtml.replace("[FS]", getFSInfo());
-        indexHtml.replace("[IP]", WiFi.localIP().toString());
 
         server.send(200, "text/html", indexHtml);
     } else {
@@ -117,6 +132,7 @@ void setup() {
     // set up server
     server.onNotFound(handleNotFound);
     server.on("/", handleRequest);
+    server.on("/info", handleInfo);
     server.serveStatic("/style.css", SPIFFS, "/style.css");
     server.serveStatic("/favicon.png", SPIFFS, "/favicon.png");
 
