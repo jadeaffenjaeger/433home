@@ -14,8 +14,14 @@ IPAddress           subnet(255,255,255,0);
 
 ESP8266WebServer    server(80);
 
-// store buttons
-short buttons[] =   {0,0,0};
+typedef struct {
+    unsigned int command;
+    String name;
+    short state;
+} Socket;
+
+const int num_sockets = 3;
+Socket sockets[num_sockets];
 
 // show how much space is used in Filesystem (total and percent)
 String getFSInfo() {
@@ -40,15 +46,6 @@ String getUpTime() {
     char buf[40];
     sprintf(buf, "%dd %dh %dm", days, hours, mins);
     return buf;
-}
-
-// Print state of button
-String getButonState(short id) {
-    String state = "pas";
-    if (buttons[id] != 0) {
-        state = "act";
-    }
-    return state;
 }
 
 // handle invalid request
@@ -90,9 +87,11 @@ void handleInfo() {
 // handle index request
 void handleRequest() {
     if(server.hasArg("switch")){
-        if(server.arg("switch") == "1") toggleSwitch(1);
-        if(server.arg("switch") == "2") toggleSwitch(2);
-        if(server.arg("switch") == "3") toggleSwitch(3);
+        int socketId = server.arg("switch").toInt();
+        if(socketId >= 0 && socketId < num_sockets) {
+            toggleSocket(socketId);
+            Serial.println(String(socketId));
+        }
     }
 
     Dir dir = SPIFFS.openDir("/");
@@ -104,10 +103,7 @@ void handleRequest() {
         indexHtml = indexFile.readString();
         indexFile.close();
 
-        // add dynamic content (Slow...)
-        indexHtml.replace("[buttonState1]", getButonState(1));
-        indexHtml.replace("[buttonState2]", getButonState(2));
-        indexHtml.replace("[buttonState3]", getButonState(3));
+        indexHtml.replace("[buttons]", socketsToHtml());
 
         server.send(200, "text/html", indexHtml);
     } else {
@@ -136,7 +132,7 @@ void setup() {
     server.serveStatic("/style.css", SPIFFS, "/style.css");
     server.serveStatic("/favicon.png", SPIFFS, "/favicon.png");
 
-    initSwitches();
+    initSockets();
 }
 
 void loop() {

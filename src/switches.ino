@@ -1,49 +1,60 @@
-#define DATAPIN 2   
-#define LONG    875   
-#define SHORT   275   
+#define DATAPIN 2
 
-void initSwitches() {
-	pinMode(DATAPIN, OUTPUT);
-	digitalWrite(DATAPIN, LOW);
-}
+#define LONG    875
+#define SHORT   275
 
-void send_one() {
-	digitalWrite(DATAPIN, HIGH);
-	delayMicroseconds(LONG);
-	digitalWrite(DATAPIN, LOW);
-	delayMicroseconds(SHORT);
-}
 
-void send_zero() {
-	digitalWrite(DATAPIN, HIGH);
-	delayMicroseconds(SHORT);
-	digitalWrite(DATAPIN, LOW);
-	delayMicroseconds(LONG);
-}
 
-void toggleSwitch(short id) {
-    unsigned long command = 0b1101010100000100000000000;
-
-    switch(id) {
-        case 1:
-            command |= (0b1101 << 13);
-            break;
-        case 2:
-            command |= (0b0111 << 13);
-            break;
-        case 3:
-            command |= (0b1010 << 13);
-            break;
+String socketsToHtml() {
+    String buttons = "";
+    for(int i = 0; i < num_sockets; i++) {
+        buttons += "<button type=\"submit\" class=";
+        if(sockets[i].state){
+            buttons += "\"act\" name=\"switch\" value=";
+        } else {
+            buttons += "\"pas\" name=\"switch\" value=";
+        }
+        buttons += "\"" + String(i) + "\">" + sockets[i].name + "</button>\n";
     }
+    return buttons;
+}
 
-    if(buttons[id] == 0) {
-        command |= (0b1100 << 1);
-        buttons[id] = 1;
+void initSockets() {
+    pinMode(DATAPIN, OUTPUT);
+    digitalWrite(DATAPIN, LOW);
+
+    sockets[0].command = 0b11010100;
+    sockets[0].name = "Kaffemaschine";
+    sockets[0].state = 0;
+
+    sockets[1].command = 0b01110100;
+    sockets[1].name = "Hifi Receiver";
+    sockets[1].state = 0;
+
+    sockets[2].command = 0b01011100;
+    sockets[2].name = "Wecker";
+    sockets[2].state = 0;
+}
+
+void toggleSocket(short id) {
+    unsigned long raw_command = 0b1101010100000000000000000;
+
+    if(id < 0 || id >= num_sockets)
+        return;
+
+    raw_command |= ((sockets[id].command) << 9);
+
+    // Turn on or off
+    if(!sockets[id].state) {
+        raw_command |= (0b1100 << 1);
+        sockets[id].state = 1;
     } else {
-        command |= (0b0011 << 1);
-        buttons[id] = 0;
+        raw_command |= (0b0011 << 1);
+        sockets[id].state = 0;
     }
-    send_command(command);
+
+    Serial.println("Sending command: " + String(raw_command));
+    send_command(raw_command);
 }
 
 void send_command(unsigned long seq) {
@@ -57,4 +68,18 @@ void send_command(unsigned long seq) {
         }
         delay(10);
     }
+}
+
+void send_one() {
+    digitalWrite(DATAPIN, HIGH);
+    delayMicroseconds(LONG);
+    digitalWrite(DATAPIN, LOW);
+    delayMicroseconds(SHORT);
+}
+
+void send_zero() {
+    digitalWrite(DATAPIN, HIGH);
+    delayMicroseconds(SHORT);
+    digitalWrite(DATAPIN, LOW);
+    delayMicroseconds(LONG);
 }

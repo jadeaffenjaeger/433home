@@ -22,8 +22,7 @@ button {
     width: 100%;
     border: none;
     margin-top: 5px;
-    padding: 2px;
-    padding: 10px, 20px;
+    padding: 10px 20px;
     color: white;
     -webkit-transition-duration: 0.2s; /* Safari */
         transition-duration: 0.2s;
