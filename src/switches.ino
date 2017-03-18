@@ -24,7 +24,7 @@ void initSockets() {
     digitalWrite(DATAPIN, LOW);
 
     sockets[0].command = 0b11010100;
-    sockets[0].name = "Kaffemaschine";
+    sockets[0].name = "Kaffeemaschine";
     sockets[0].state = 0;
 
     sockets[1].command = 0b01110100;
