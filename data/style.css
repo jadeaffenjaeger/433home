@@ -2,11 +2,8 @@ body, input, button {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 16px;
-}
-
-body {
-    background-color: #DDD;
     color: white;
+    background-color: #DDD;
     text-align: center;
 }
 
@@ -21,7 +18,7 @@ h1 {
 button {
     width: 100%;
     border: none;
-    margin-top: 5px;
+    margin: 5px 0px;
     padding: 10px 20px;
     color: white;
     -webkit-transition-duration: 0.2s; /* Safari */
@@ -65,14 +62,9 @@ a:hover{
     background-color: white;
 }
 
-ul {
-    margin: 0px;
-    padding: 0px;
-}
-
 li {
-    height: 30px;
-    margin: 10px 0px;
+    height: 40px;
+    /*margin: 10px 0px;*/
     list-style-type: none;
 }
 
@@ -92,10 +84,6 @@ li {
 .info_content {
     float: right;
     width: 60%;
-}
-
-form{
-    padding-bottom: 5px;
 }
 
 #main {
