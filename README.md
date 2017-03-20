@@ -37,4 +37,9 @@ And that's what it looks like in a browser. One of the next steps will be adding
 The responsive part of the HTML is nothing fancy. It basically makes text and buttons bigger and the whole page fullscreen when displayed on a phone.
 
 ### TODO
-- Store button states to persistent memory in case of reboots
+- [ ] Store button states to persistent memory in case of reboots
+- [ ] Move Server functions to seperate file
+- [ ] Implement NTP timekeeping
+- [ ] Implement Alarm control structures
+- [ ] Build Alarm interface page
+- [ ] Update screenshots with new design
