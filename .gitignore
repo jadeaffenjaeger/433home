@@ -1,2 +1,3 @@
-src/defines.ino
+src/credentials.h
 .pioenvs
+.pio

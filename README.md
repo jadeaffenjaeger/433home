@@ -26,20 +26,37 @@ I repeated the process for the other buttons on the remote as well and those are
 The remote sends each control sequence 5 times in a row, but I went with 10 times, because my transmitter only runs on 3.3V and the signal needs to pass through walls. From what I can tell, this seems to work quite reliably. The transmitter could take up to 12V, if more range is needed.
 
 ### HTML
-There's only one page, which is the html template in the /data folder. The favicon and the CSS are seperate files and get served statically through SPIFFS directly. The html is parsed by the program before delivery and certain wildcards are replaced with dynamic values. This slows down page delivery quite a bit, so I will probably move the system info to a seperate page and only parse for the button states. The request gets sent through a POST request, because I find that to be a much cleaner solution than using GET.
+Update 2022: I gave the whole project a bigger overhaul. The frontend now uses [Bootstrap 5](https://getbootstrap.com) for CSS and [HTMX](https://htmx.org/) to interact with the ESP8266 Webserver. Buttons are now stateless because I found that changing the state of the button depending on whether the socket was switched on or off was more confusing than helpful. HTML is not rendered on the ESP8266 anymore because dynamically replacing content inside files turned out rather slow. Instead, runtime
+information is fetched from dedicated endpoints and rendered on the client side via HTMX.
 
-This is what the whole thing looks like on a my phone... third button currently has nothing connected to it (obviously).
+This is what the whole thing looks like on small device:
+
 ![Page on phone](/images/page_phone.png)
 
-And that's what it looks like in a browser. One of the next steps will be adding DNS support.
-![Page on phone](/images/page_desktop.png)
+And that's what it looks like in a browser. 
 
-The responsive part of the HTML is nothing fancy. It basically makes text and buttons bigger and the whole page fullscreen when displayed on a phone.
+![Page on desktop](/images/page_desktop.png)
 
-### TODO
-- [ ] Store button states to persistent memory in case of reboots
-- [ ] Move Server functions to seperate file
-- [ ] Implement NTP timekeeping
-- [ ] Implement Alarm control structures
-- [ ] Build Alarm interface page
-- [ ] Update screenshots with new design
+### Building & Flashing
+Create a file `src/credentials.h` with the following content:
+```
+#ifndef CREDENTIALS_H
+#define CREDENTIALS_H
+
+const char *ssid = "YOUR_SSID";
+const char *password = "YOUR_PASSWORD";
+
+#endif
+```
+Building and flashing is handled by [PlatformIO](https://platformio.org/). Change the line `board = esp01` in the `platformio.ini` if you are using another board. To flash the code, run:
+```
+pio run 
+```
+Uploading the file system is handled separately by the command
+```
+pio run -t uploadfs
+```
+If you want to open the serial monitor, run:
+```
+pio run -t monitor
+```
