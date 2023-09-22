@@ -1,0 +1,28 @@
+{
+    "name": "433home",
+    "version": "1.0.0",
+    "description": "Minimal Server to control 433MHz power sockets",
+    "browserslist": "> 0.5%, last 2 versions, not dead",
+    "source": [
+        "./src/index.html",
+        "./src/uptime.html",
+        "./src/ip.html",
+        "./src/rssi.html",
+        "./src/ssid.html",
+        "./src/fsinfo.html"
+    ],
+    "scripts": {
+        "start": "parcel",
+        "build": "parcel build --no-source-maps src/index.html"
+    },
+    "dependencies": {
+        "@fontsource/lexend-peta": "^5.0.8",
+        "bootstrap": "^5.3.2",
+        "bootstrap-icons": "^1.11.1",
+        "htmx.org": "^1.9.5",
+        "parcel": "^2.9.3"
+    },
+    "devDependencies": {
+        "@parcel/transformer-sass": "^2.9.3"
+    }
+}

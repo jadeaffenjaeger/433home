@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>433://home</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark mb-5 shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand m-auto text-light" href="#">433://HOME</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="card shadow mb-3">
+            <h3 class="card-header bg-primary text-light"><i class="bi bi-plug-fill"></i>Power Sockets</h3>
+            <div class="card-body">
+                <form hx-post="/socket" hx-swap="none" name="1">
+                    <div class="row p-3 m-3 border border-dark rounded-3">
+                        <button type="Submit" name="1" value="on" class="btn col-md-3 btn-success">
+                            <i class="bi bi-lightbulb"></i>
+                            On
+                        </button>
+                        <div class="col-md-6 text-center text-dark pt-2">
+                            <h4>HiFi Receiver</h4>
+                        </div>
+                        <button type="Submit" name="1" value="off" class="btn btn-danger col-md-3">
+                            <i class="bi bi-lightbulb-off"></i>
+                            Off
+                        </button>
+                    </div>
+                </form>
+                <form hx-post="/socket" hx-swap="none" name="2">
+                    <div class="row p-3 m-3 border border-dark rounded-3">
+                        <button type="Submit" name="2" value="on" class="btn col-md-3 btn-success">
+                            <i class="bi bi-lightbulb"></i>
+                            On</button>
+                        <div class="col-md-6 text-center text-dark pt-2">
+                            <h4>Schreibtisch</h4>
+                        </div>
+                        <button type="Submit" name="2" value="off" class="btn btn-danger col-md-3">
+                            <i class="bi bi-lightbulb-off"></i>
+                            Off
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card shadow mb-3">
+            <h3 class="card-header bg-primary text-light"><i class="bi bi-sliders"></i>ESP8266 Status</h3>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6 text-primary text-md-end">Uptime</div>
+                    <div class="col-md-6" hx-get="/uptime" hx-trigger="load, every 10s"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6 text-primary text-md-end">File System Usage</div>
+                    <div class="col-md-6" hx-get="/fsinfo" hx-trigger="load"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6 text-primary text-md-end">Connected to</div>
+                    <div class="col-md-6" hx-get="/ssid" hx-trigger="load"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6 text-primary text-md-end">IP Address</div>
+                    <div class="col-md-6" hx-get="/ip" hx-trigger="load"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6 text-primary text-md-end">RSSI</div>
+                    <div class="col-md-6" hx-get="/rssi" hx-trigger="load, every 10s"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>

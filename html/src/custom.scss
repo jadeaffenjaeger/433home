@@ -1,0 +1,48 @@
+$header_font: "Lexend Peta";
+$primary: #26577c;
+$light: #eee;
+$dark: #222;
+$body-bg: $light;
+
+@import "~bootstrap/scss/bootstrap";
+
+.bi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.navbar .navbar-brand {
+  font-weight: 800;
+  letter-spacing: .3rem;
+  font-size: 2.5rem;
+  font-family: $header_font, sans-serif;
+}
+
+h3.card-header {
+  font-weight: 400;
+  font-size: 1.75rem;
+  font-family: $header_font, sans-serif;
+  text-transform: uppercase;
+}
+
+.btn {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
+.card {
+  background-color: white;
+}
+
+.bi {
+  vertical-align: -0.125em;
+  font-weight: bold;
+}
+
+.card-header>i {
+  float: right;
+}
