@@ -1,5 +1,4 @@
 # 433 MHz Power Switches Frontend
-
 This is a simple network front end for a set of wireless remote power switches in my home. It sets up an HTTP server, drives a 433 MHz transmitter and displays the current status of the power sockets. The design is responsive to work on phones as well as desktop computers.
 
 ### Sockets
@@ -25,21 +24,26 @@ I repeated the process for the other buttons on the remote as well and those are
 
 The remote sends each control sequence 5 times in a row, but I went with 10 times, because my transmitter only runs on 3.3V and the signal needs to pass through walls. From what I can tell, this seems to work quite reliably. The transmitter could take up to 12V, if more range is needed.
 
-### HTML
-Update 2022: I gave the whole project a bigger overhaul. The frontend now uses [Bootstrap 5](https://getbootstrap.com) for CSS and [HTMX](https://htmx.org/) to interact with the ESP8266 Webserver. Buttons are now stateless because I found that changing the state of the button depending on whether the socket was switched on or off was more confusing than helpful. HTML is not rendered on the ESP8266 anymore because dynamically replacing content inside files turned out rather slow. Instead, runtime
-information is fetched from dedicated endpoints and rendered on the client side via HTMX.
-
+## HTML
+The website, including all assets, is built with npm and served from the ESP8266 filesystem.
+To build the website, go to the `html` directory and build using `npm`:
+### Build step
+```bash
+cd html
+npm run build
+```
 This is what the whole thing looks like on small device:
 
 ![Page on phone](/images/page_phone.png)
 
-And that's what it looks like in a browser. 
+And that's what it looks like in a browser:
 
 ![Page on desktop](/images/page_desktop.png)
 
-### Building & Flashing
+### Building & Flashing Firmware
+Your WiFi credentials need to be compiled into the application.
 Create a file `src/credentials.h` with the following content:
-```
+```c
 #ifndef CREDENTIALS_H
 #define CREDENTIALS_H
 
@@ -48,15 +52,15 @@ const char *password = "YOUR_PASSWORD";
 
 #endif
 ```
-Building and flashing is handled by [PlatformIO](https://platformio.org/). Change the line `board = esp01` in the `platformio.ini` if you are using another board. To flash the code, run:
+Building and flashing is handled by [PlatformIO](https://platformio.org/). To flash the code, run:
 ```
 pio run 
 ```
-Uploading the file system is handled separately by the command
+Building and uploading the LittleFS file system is handled separately:
 ```
 pio run -t uploadfs
 ```
-If you want to open the serial monitor, run:
+If you want to open the serial terminal, run:
 ```
 pio run -t monitor
 ```
