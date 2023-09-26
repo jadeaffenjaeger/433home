@@ -15,7 +15,6 @@ $body-bg: $light;
 
 .navbar .navbar-brand {
   font-weight: 800;
-  letter-spacing: .3rem;
   font-size: 2.5rem;
   font-family: $header_font, sans-serif;
 }
@@ -36,13 +35,4 @@ h3.card-header {
 
 .card {
   background-color: white;
-}
-
-.bi {
-  vertical-align: -0.125em;
-  font-weight: bold;
-}
-
-.card-header>i {
-  float: right;
 }

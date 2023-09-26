@@ -13,7 +13,7 @@
     ],
     "scripts": {
         "start": "parcel",
-        "build": "parcel build --no-source-maps src/index.html"
+        "build": "parcel build --no-source-maps src/index.html --dist-dir build"
     },
     "dependencies": {
         "@fontsource/lexend-peta": "^5.0.8",
