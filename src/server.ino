@@ -16,7 +16,12 @@ Socket sockets[num_sockets];
 
 void setup()
 {
-    // connect to Wifi
+    // Turn off builtin LED
+    // (yes I take power consumption too seriously)
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, HIGH);
+
+    // Connect WiFi
     WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, password);
     WiFi.hostname("433home");
@@ -30,7 +35,7 @@ void setup()
     LittleFS.begin();
     Serial.begin(115200);
 
-    // set up server
+    // set up routes for dynamic HTMX loading
     server.on("/socket", handleSocket);
     server.on("/rssi", handleRSSI);
     server.on("/ssid", handleSSID);
@@ -38,6 +43,8 @@ void setup()
     server.on("/ip", handleIP);
     server.on("/fsinfo", handleFsInfo);
 
+    // Website and assets are statically
+    // served from prebuilt FS
     server.serveStatic("/", LittleFS, "/");
 
     server.onNotFound(handleNotFound);
