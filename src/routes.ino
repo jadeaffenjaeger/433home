@@ -23,7 +23,7 @@ void handleUptime() {
     mins -= hours * 60;
     hours -= days * 24;
     char buf[40];
-    snprintf(buf, 40, "%d days, %dh:%dm:%ds", days, hours, mins, secs);
+    snprintf(buf, 40, "%d days, %02dh:%02dm", days, hours, mins);
     server.send(200, "text/plain", String(buf));
 }
 
@@ -42,7 +42,7 @@ void handleIP() {
 void handleFsInfo() {
     char buf[40];
     FSInfo fs_info;
-    SPIFFS.info(fs_info);
+    LittleFS.info(fs_info);
     long used = fs_info.usedBytes;
     long total = fs_info.totalBytes;
     long percent = (100*used)/total;
